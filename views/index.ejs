@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TikTok Video Downloader</title>
+    <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>TikTok Video Downloader</h1>
+        <p>Paste your TikTok video link below to download it in MP4 or MP3 format.</p>
+
+        <form action="/download" method="POST">
+            <input type="url" name="url" placeholder="Paste TikTok video URL here..." required>
+            <button type="submit">Download</button>
+        </form>
+
+        <% if (video) { %>
+            <div class="video-result">
+                <h2>Download Your Video:</h2>
+                <video controls>
+                    <source src="<%= video.videoUrl %>" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+                <div class="download-links">
+                    <a href="<%= video.videoUrl %>" download="tiktok_video.mp4">Download MP4</a>
+                    <a href="<%= video.audioUrl %>" download="tiktok_audio.mp3">Download MP3</a>
+                </div>
+            </div>
+        <% } %>
+
+        <% if (error) { %>
+            <div class="error">
+                <p><%= error %></p>
+            </div>
+        <% } %>
+    </div>
+</body>
+</html>
